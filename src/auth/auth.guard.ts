@@ -9,7 +9,7 @@ import { Request } from 'express';
 
 interface JwtPayload {
   sub: string;
-  email: string;
+  role: string;
 }
 
 interface RequestWithUser extends Request {
@@ -44,8 +44,6 @@ export class AuthGuard implements CanActivate {
 
   private extractTokenFromHeader(request: Request): string | undefined {
     const [type, token] = request.headers.authorization?.split(' ') ?? [];
-    console.log({ Auth: request.headers.authorization });
-
     return type === 'Bearer' ? token : undefined;
   }
 }
